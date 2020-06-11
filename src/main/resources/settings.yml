@@ -1,0 +1,45 @@
+#支持的货币类型
+#Vault : Money 
+#PlayerPoints : Point
+#如果不需要直接删掉就行
+money: 
+  currency: "金币"      #货币类型 (显示名)
+  min-money: 100        #最小金额 (正整数)
+  max-money: 10000000   #最大金额 需要保证(玩家上限 * 最大金额) 小于21E
+  min-player: 2  #最少玩家
+  max-player: 40 #最大玩家数(最多只能有这么多玩家加入同一局)
+  loser: 1    #多少输家
+  rate: 0.1   #税
+  delay: 45   #多久之后开盘 秒
+  cdmsg:      #提示信息(开盘前多少秒发送)  "<时间>:(发送的信息)"
+  - "10:&a&7[&b&l龙虎盘&7] &f&l龙虎盘即将开盘"
+  - "8:&7[&b&l龙虎盘&7] &f&l倒计时"
+  - "3:&7[&b&l龙虎盘&7] &f&l三"
+  - "2:&7[&b&l龙虎盘&7] &f&l二"
+  - "1:&7[&b&l龙虎盘&7] &f&l一"
+  cmd: #开始/结束/有玩家加入时执行的指令(控制台指令)
+    start: #这里是龙虎盘开始的时候执行的指令
+    - 'tellraw @a [{"text":"&7[&b&l龙虎盘&7] &f&l玩家&a %owner% &f&l开设了一局价值&e %money% &f&l%currency%的龙虎盘"},{"text":"&e&l快点点我加入吧！","clickEvent":{"action":"run_command","value":"/longhupan join %owner%"},"hoverEvent":{"action":"show_text","value":"&e&l快点我啊！快点我！"}}]'
+    end: []   #这里是龙虎盘结束的时候执行的指令
+    join: []  #这里是有玩家加入的时候执行的指令
+
+point: 
+  currency: "点券"      #货币类型
+  min-money: 100        #最小金额
+  max-money: 10000000   #最大金额
+  min-player: 2  #最小玩家数(低于这个数量将不会开盘)
+  max-player: 40 #最大玩家数(最多只能有这么多玩家加入同一局)
+  loser: 1    #有几位输家
+  rate: 0.1   #税率
+  delay: 45   #多久之后开盘(单位:秒)
+  cdmsg:      #提示信息(开盘前多少秒发送)  "<时间>:(发送的信息)"
+  - "10:&a&7[&b&l龙虎盘&7] &f&l龙虎盘即将开盘"
+  - "8:&7[&b&l龙虎盘&7] &f&l倒计时"
+  - "3:&7[&b&l龙虎盘&7] &f&l三"
+  - "2:&7[&b&l龙虎盘&7] &f&l二"
+  - "1:&7[&b&l龙虎盘&7] &f&l一"
+  cmd: #开始/结束/有玩家加入时执行的指令(控制台指令)
+    start:     #这里是龙虎盘开始的时候执行的指
+    - 'tellraw @a [{"text":"&7[&b&l龙虎盘&7] &f&l玩家&a %owner% &f&l开设了一局价值&e %money% &f&l%currency%的龙虎盘"},{"text":"&e&l快点点我加入吧！","clickEvent":{"action":"run_command","value":"/longhupan join %owner%"},"hoverEvent":{"action":"show_text","value":"&e&l快点我啊！快点我！"}}]'
+    end: []   #这里是龙虎盘结束的时候执行的指令
+    join: []  #这里是有玩家加入的时候执行的指令

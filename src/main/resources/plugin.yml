@@ -1,0 +1,16 @@
+main: pro.sandiao.plugin.longhupan.Main
+
+name: Longhupan
+version: 1.0.0
+api-version: "1.14"
+author: msg_dw
+description: "赌博插件"
+
+#前置 
+softdepend: 
+- Vault
+- PlayerPoints
+
+#命令
+commands:
+  Longhupan:

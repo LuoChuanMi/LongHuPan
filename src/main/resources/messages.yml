@@ -1,0 +1,55 @@
+#几乎所有信息都可以用变量 能用哪些自己摸索 我有可能没演示
+#我只演示了一些 我不演示 你就绝对不知道的变量
+#所有的信息都是私人信息 会发送给相关的玩家 全局信息请在 commands 里面 用命令实现
+#命令相关
+Help: |
+  &eLongHuPan &7&l插件帮助:
+  
+  &f  /longhupan create &7<&e&l货币类型&7> <&e&l金额&7> &7- &l创建一局龙虎盘
+  &f  /longhupan join &7<&e&l玩家名&7> &7- &l加入某玩家的龙虎盘
+#  /longhupan reload 重载插件配置
+
+PlayerNameDelimiter: ", "  #玩家名的分隔符 包括一些 %players% %winners% %losers% 变量需要使用
+
+NotHavePermissions: "&7[&b&l龙虎盘&7] &f&l你没有足够的权限这么做"
+ReloadComplete: "&7[&b&l龙虎盘&7] &f&l重载完毕"
+NotPlayer: "&7[&b&l龙虎盘&7] &f&l只有玩家可以输入这条指令"
+NoPlayerFound: "&7[&b&l龙虎盘&7] &f&l玩家名错误或玩家&c %player% &f&l不存在"
+NotGameSettings: "&7[&b&l龙虎盘&7] &f&l错误的货币类型:&c&l %currency% &7(请使用 Money/Point)"
+NumberFormatError: "&7[&b&l龙虎盘&7] &f&l错误的数值:&c&l %money%"
+
+#所有的设置项目 都有对应变量 maxmoney maxplayer losernum(输家数) 等等等等
+#创建龙虎盘相关
+CreateGameContains: "&7[&b&l龙虎盘&7] &f&l你已经创建了一个龙虎盘"
+CreateGameMinMoney: "&7[&b&l龙虎盘&7] &f&l开启龙虎盘最少需要 &e%minmoney% &f&l%currency%"
+CreateGameMaxMoney: "&7[&b&l龙虎盘&7] &f&l最多只能开启价值 &e%maxmoney% &f&l%currency%的龙虎盘"
+CreateGameNoMoney: "&7[&b&l龙虎盘&7] &f&l你的%currency%不足以创建龙虎盘"
+CreateGameMoneyError: "&7[&b&l龙虎盘&7] &f&l扣款失败" #正常情况下不会出现这句话
+
+#加入龙虎盘相关
+JoinGameNoContains: "&7[&b&l龙虎盘&7] &f&l找不到&a %owner% &f&l所创建的龙虎盘"
+JoinGameMaxPlayer: "&7[&b&l龙虎盘&7] &a%owner% &f&l创建的龙虎盘人数已满"
+JoinGameContains: "&7[&b&l龙虎盘&7] &f&l你已经加入了&a %owner% &f&l的龙虎盘"
+JoinGameNoMoney: "&7[&b&l龙虎盘&7] &f&l加入龙虎盘需要 &e%money% &c&l%currency%"
+JoinGameMoneyError: "&7[&b&l龙虎盘&7] &f&l扣款失败" #正常情况下不会出现这句话
+
+#结束龙虎盘相关
+EndGamePeopleLess: "&7[&b&l龙虎盘&7] &c&l人数不足，游戏结束，&c&l%currency%&l已经退还"
+
+#游戏事件相关 
+StratGameToPlayers: "&7[&b&l龙虎盘&7] &a&l龙虎盘创建成功"
+StratGameToBroadcast: "" #开始游戏时发送给服务器内所有人
+JoinGameToPlayer: "&7[&b&l龙虎盘&7] &f&l你加入了&a %owner% &f&l的%currency%龙虎盘" #加入游戏时发送给加入者
+JoinGameToPlayers: "&7[&b&l龙虎盘&7] &f&l玩家 &a%player% &f&l加入了 &a%owner% &f&l的%currency%龙虎盘"  #加入游戏时发送给游戏内的所有人
+JoinGameToBroadcast: "" #加入游戏是发送给服务器内所有人 (留空为不发送 所有消息都可以)
+EndGameToPlayer: "" #结束游戏时发送给所有者
+EndGameToPlayers: "&7[&b&l龙虎盘&7] &a%owner% &f&l创建的%currency%龙虎盘已结束" #结束游戏时加入游戏的所有人 (同时也会发送给所有者 会重复哦)
+EndGameToWinners: "&7[&b&l龙虎盘&7] &f&l你赢得了&a %owner% &f&l创建的%currency%龙虎盘的胜利，得到了&a %newmoney% &f&l%currency%" #结束游戏时发送给胜利者 
+EndGameToLosers: "&7[&b&l龙虎盘&7] &f&l你输掉了 &a%owner% &f&l的%currency%龙虎盘" #结束时发送给所有输家
+EndGameToBroadcast: "&7[&b&l龙虎盘&7] &a%owner% &f&l的%currency%龙虎盘已结束" #结束游戏时发送给游戏内的所有人
+EndGameOfPeopleLessToPlayer: "" #人数不足时结束发送的第一条信息 
+EndGameOfPeopleLessToPlayers: "" #人数不足时结束发送的第二条信息
+EndGameOfPeopleLessToBroadcast: "&7[&b&l龙虎盘&7] &a%owner% &f&l创建的%currency%龙虎盘由于玩家不足结束" #人数不足时结束发送的第三条信息 
+CloseGameToPlayer: "&7[&b&l龙虎盘&7] &c&l游戏异常结束" #异常结束 例如服务器突然重启 或者调用CloseGame(1)方法结束游戏
+CloseGameToPlayers: "&7[&b&l龙虎盘&7] &a%owenr% &f&l的%currency%龙虎盘已结束"   #异常结束
+CloseGameToBroadcast: "&7[&b&l龙虎盘&7] &a%owenr% &f&l的%currency%龙虎盘已结束" #异常结束
