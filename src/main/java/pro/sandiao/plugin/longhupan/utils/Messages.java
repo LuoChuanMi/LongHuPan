@@ -1,20 +1,21 @@
 package pro.sandiao.plugin.longhupan.utils;
 
-import java.io.File;
-import java.util.List;
-
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-
-import net.md_5.bungee.api.ChatColor;
 import pro.sandiao.plugin.longhupan.Main;
 import pro.sandiao.plugin.longhupan.event.LonghupanEndEvent;
 import pro.sandiao.plugin.longhupan.game.GameSettings;
 import pro.sandiao.plugin.longhupan.game.LonghupanGame;
+
+import java.io.File;
+import java.util.List;
 
 public class Messages {
 
@@ -36,6 +37,7 @@ public class Messages {
 
     /**
      * 获取配置文件节点对于的字符串
+     *
      * @param node 配置文件节点
      * @return 消息实例
      */
@@ -47,7 +49,8 @@ public class Messages {
         return new Messages(ChatColor.translateAlternateColorCodes('&', msg));
     }
 
-    private Messages(){}
+    private Messages() {
+    }
 
     private Messages(String msg) {
         message = msg;
@@ -85,7 +88,7 @@ public class Messages {
         return this;
     }
 
-    public Messages parse(LonghupanEndEvent e){
+    public Messages parse(LonghupanEndEvent e) {
         String a = Integer.toString(e.getAllMoney());
         String b = Integer.toString(e.getAllMoney() / e.getWinners().size());
         parse("%allmoney%", a);
@@ -111,15 +114,15 @@ public class Messages {
         return this;
     }
 
-    public Messages parse(String oldString, List<OfflinePlayer> players){
-        if (message.contains(oldString)){
+    public Messages parse(String oldString, List<OfflinePlayer> players) {
+        if (message.contains(oldString)) {
             StringBuilder string = new StringBuilder();
-            for (OfflinePlayer player : players){
+            for (OfflinePlayer player : players) {
                 string.append(delimiter);
                 string.append(player.getName());
             }
-    
-            if (string.length() > 0){
+
+            if (string.length() > 0) {
                 string.delete(0, delimiter.length());
             }
             message = message.replace(oldString, string.toString());
@@ -127,41 +130,47 @@ public class Messages {
         return this;
     }
 
-    public void sendRawMessage(List<OfflinePlayer> players){
-        for(OfflinePlayer player : players){
-            if (player.getPlayer() != null)
-                player.getPlayer().sendMessage(message);
+    public void sendRawMessage(List<OfflinePlayer> players) {
+        for (OfflinePlayer player : players) {
+            if (player.getPlayer() != null) {
+                Component component = MiniMessage.miniMessage().deserialize(message);
+                Main.getBukkitAudiences().player(player.getPlayer()).sendMessage(component);
+            }
         }
     }
 
-    public void sendMessage(List<OfflinePlayer> players){
+    public void sendMessage(List<OfflinePlayer> players) {
         if (!message.isEmpty())
-        for(OfflinePlayer player : players){
-            if (player.getPlayer() != null)
-                player.getPlayer().sendMessage(message);
-        }
+            for (OfflinePlayer player : players) {
+                if (player.getPlayer() != null) {
+                    Component component = MiniMessage.miniMessage().deserialize(message);
+                    Main.getBukkitAudiences().player(player.getPlayer()).sendMessage(component);
+                }
+            }
     }
 
-    public void sendMessage(OfflinePlayer player){
+    public void sendMessage(OfflinePlayer player) {
         if (!message.isEmpty())
-        if (player.getPlayer() != null)
-            player.getPlayer().sendMessage(message);
+            if (player.getPlayer() != null) {
+                Component component = MiniMessage.miniMessage().deserialize(message);
+                Main.getBukkitAudiences().player(player.getPlayer()).sendMessage(component);
+            }
     }
 
-	public void sendMessage(CommandSender sender) {
+    public void sendMessage(CommandSender sender) {
         if (!message.isEmpty())
-        sender.sendMessage(message);
-	}
+            sender.sendMessage(message);
+    }
 
-	public void broadcastMessage() {
+    public void broadcastMessage() {
         if (!message.isEmpty())
-        for(Player player : Bukkit.getOnlinePlayers()){
-            parse(player);
-            player.sendMessage(message);
-        }
-	}
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                parse(player);
+                player.sendMessage(message);
+            }
+    }
 
-	public void dispatchCommand(ConsoleCommandSender consoleSender) {
+    public void dispatchCommand(ConsoleCommandSender consoleSender) {
         Bukkit.dispatchCommand(consoleSender, message);
-	}
+    }
 }

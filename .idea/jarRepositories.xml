@@ -36,5 +36,15 @@
       <option name="name" value="vault-repo" />
       <option name="url" value="https://nexus.hc.to/content/repositories/pub_releases" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="MavenLocal" />
+      <option name="name" value="MavenLocal" />
+      <option name="url" value="file:/$MAVEN_REPOSITORY$/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://repo.maven.apache.org/maven2/" />
+    </remote-repository>
   </component>
 </project>
