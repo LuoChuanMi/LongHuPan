@@ -166,7 +166,8 @@ public class Messages {
         if (!message.isEmpty())
             for (Player player : Bukkit.getOnlinePlayers()) {
                 parse(player);
-                player.sendMessage(message);
+                Component component = MiniMessage.miniMessage().deserialize(message);
+                Main.getBukkitAudiences().player(player).sendMessage(component);
             }
     }
 

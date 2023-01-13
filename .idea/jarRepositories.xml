@@ -12,6 +12,11 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://repo.maven.apache.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="spigot-repo" />
       <option name="name" value="spigot-repo" />
       <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
@@ -40,11 +45,6 @@
       <option name="id" value="MavenLocal" />
       <option name="name" value="MavenLocal" />
       <option name="url" value="file:/$MAVEN_REPOSITORY$/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://repo.maven.apache.org/maven2/" />
     </remote-repository>
   </component>
 </project>
