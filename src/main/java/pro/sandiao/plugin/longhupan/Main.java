@@ -19,7 +19,7 @@ public class Main extends JavaPlugin{
 
         Messages.init();
 
-        getCommand("Longhupan").setExecutor(new Commands());
+        getCommand("dplan").setExecutor(new Commands());
 
         Bukkit.getPluginManager().registerEvents(new GameListener(), this);
     }
