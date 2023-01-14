@@ -158,8 +158,10 @@ public class Messages {
     }
 
     public void sendMessage(CommandSender sender) {
-        if (!message.isEmpty())
-            sender.sendMessage(message);
+        if (!message.isEmpty()) {
+            Component component = MiniMessage.miniMessage().deserialize(message);
+            Main.getBukkitAudiences().sender(sender).sendMessage(component);
+        }
     }
 
     public void broadcastMessage() {
